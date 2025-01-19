@@ -3,62 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ace of Bluff</title>
+    <title>Ace of Bluff Game</title>
     <link rel="stylesheet" href="styles/styles.css">
     <script src="scripts/game.js" defer></script>
 </head>
 <body>
-    <!-- Initial Setup Screen -->
+    <!-- Initial Screen: Number of Players and Name Inputs -->
     <div id="initial-screen">
         <h1>Ace of Bluff</h1>
-
-        <!-- Player Selection Section -->
-        <div>
-            <label for="num-players">Number of players: </label>
-            <select id="num-players">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </div>
-
-        <!-- Dynamic Player Name Inputs -->
+        <label for="num-players">Number of players:</label>
+        <select id="num-players">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
         <div id="player-names"></div>
-
         <button id="start-button" disabled>Start Game</button>
         <button id="rules-button">How to Play</button>
     </div>
 
-    <!-- Modal for rules -->
-    <div id="rules-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-rules">&times;</span>
+    <!-- Game Screen: Display Players and Cards -->
+    <div id="game-container" style="display: none;">
+        <div id="game-stats">
+            <!-- Game Status (turn indicator, notifications) -->
+        </div>
+        <div id="table-container" class="table-container">
+            <!-- Table and cards displayed here -->
+        </div>
+        <div id="cloud-notification" class="cloud-notification" style="display: none;"></div>
+    </div>
+
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="rules-modal" style="display: none;">
+        <div class="rules-content">
+            <span id="close-rules" class="close-rules">&times;</span>
             <h2>How to Play</h2>
-            <p>Follow the rules to play Ace of Bluff. The goal is to bluff and win by choosing cards wisely!</p>
+            <p>Insert rules here...</p>
         </div>
     </div>
 
-    <!-- Game Container -->
-    <div id="game-container" class="game-active">
-        <div class="table-container">
-            <!-- Player chairs and cards will be dynamically displayed here -->
-        </div>
-
-        <div id="game-stats"></div>
-
-        <!-- Notification for End Game Requests -->
-        <div id="cloud-notification" class="cloud-notification"></div>
+    <!-- End Game Modal or Notification -->
+    <div id="end-game-modal" style="display: none;">
+        <button onclick="requestEndGame()">Request to End Game</button>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Ace of Bluff Game</p>
-    </footer>
-
+    <script>
+        // Add any necessary scripts here (game logic in game.js)
+    </script>
 </body>
 </html>
