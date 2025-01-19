@@ -1,22 +1,14 @@
 /* General reset and body styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #333;
+    background-color: #4d4d4d; /* Background color for the overall page */
     color: white;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-#end-game-notification {
-    font-size: 12px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-}
-
-#initial-screen {
-    margin-top: 50px;
-}
-
+/* Game Table and Chairs */
 #game-stats {
     display: flex;
     justify-content: center;
@@ -24,39 +16,104 @@ body {
     position: relative;
 }
 
-.player-card-container {
+.table-container {
     position: relative;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    border-radius: 50%;
+    border: 3px solid #c8c8c8;
+    background-color: #3d5a6f; /* Table color */
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Circular player positioning */
+.player-card-container {
+    position: absolute;
     width: 400px;
     height: 400px;
     margin: auto;
-    border-radius: 50%;
-    border: 2px solid #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    position: relative;
+    position: absolute;
 }
 
+/* Styling each card in the circle */
 .card {
-    width: 80px;
-    height: 120px;
-    background-color: #fff;
-    color: #333;
+    width: 100px;
+    height: 140px;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
     margin: 5px;
     border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: absolute;
     text-align: center;
     font-size: 14px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Make each card position in a circular manner */
-.card:nth-child(1) { transform: rotate(0deg) translate(150px) rotate(0deg); }
-.card:nth-child(2) { transform: rotate(30deg) translate(150px) rotate(-30deg); }
-.card:nth-child(3) { transform: rotate(60deg) translate(150px) rotate(-60deg); }
-.card:nth-child(4) { transform: rotate(90deg) translate(150px) rotate(-90deg); }
-.card:nth-child(5) { transform: rotate(120deg) translate(150px) rotate(-120deg); }
+/* Adjusting card position for a circular formation */
+.card:nth-child(1) { transform: rotate(0deg) translate(180px) rotate(0deg); }
+.card:nth-child(2) { transform: rotate(36deg) translate(180px) rotate(-36deg); }
+.card:nth-child(3) { transform: rotate(72deg) translate(180px) rotate(-72deg); }
+.card:nth-child(4) { transform: rotate(108deg) translate(180px) rotate(-108deg); }
+.card:nth-child(5) { transform: rotate(144deg) translate(180px) rotate(-144deg); }
+.card:nth-child(6) { transform: rotate(180deg) translate(180px) rotate(-180deg); }
+.card:nth-child(7) { transform: rotate(216deg) translate(180px) rotate(-216deg); }
+.card:nth-child(8) { transform: rotate(252deg) translate(180px) rotate(-252deg); }
+.card:nth-child(9) { transform: rotate(288deg) translate(180px) rotate(-288deg); }
+.card:nth-child(10) { transform: rotate(324deg) translate(180px) rotate(-324deg); }
+
+#end-game-notification {
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    top: 10px;
+    right: 10px;
+    display: none;
+}
+
+/* Cloud notification styles */
+.cloud-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    display: none;
+}
+
+/* Chair customization */
+.chair {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #f0a500;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chair img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+/* Chair placements around the table (example for 5 players) */
+.chair:nth-child(1) { top: 15px; left: 50%; transform: translateX(-50%); }
+.chair:nth-child(2) { top: 50%; left: 10px; }
+.chair:nth-child(3) { bottom: 15px; left: 50%; transform: translateX(-50%); }
+.chair:nth-child(4) { top: 50%; right: 10px; }
+.chair:nth-child(5) { top: 10px; left: 50%; }
