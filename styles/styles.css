@@ -1,148 +1,232 @@
-/* General body styling */
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f4f4f4;
+/* General Styles */
+body, html {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Start screen */
-.start-screen {
-  padding: 20px;
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.mode-selection {
-  margin: 20px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
   font-size: 16px;
-  margin: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #3498db;
+  color: white;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: #bdc3c7;
   cursor: not-allowed;
 }
 
-input[type="number"], input[type="checkbox"] {
-  margin: 10px;
+button:hover {
+  background-color: #2980b9;
 }
 
-.settings {
-  margin-top: 20px;
-}
-
-.player-options, .deck-selection {
-  margin-top: 10px;
-}
-
-.start-game {
-  margin-top: 20px;
-}
-
-/* Game screen */
-.game-screen {
-  display: none;
-  padding: 20px;
-}
-
-.hand {
-  margin-top: 20px;
+/* Start Screen */
+.start-screen {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.card {
-  width: 60px;
-  height: 80px;
-  margin: 5px;
-  background-color: #fff;
-  border: 1px solid #000;
-  text-align: center;
-  line-height: 80px;
-  font-size: 18px;
-  border-radius: 5px;
-}
-
-.center-pile {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100px;
-  border: 2px dashed #000;
-}
-
-.timer {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border: 10px solid #333;
-  border-radius: 50%;
-  margin: 20px auto;
-}
-
-.circular-timer {
-  text-align: center;
-  line-height: 120px;
-  font-size: 20px;
-}
-
-/* Buttons */
-.buttons {
   margin-top: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
+.start-screen h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.option-button {
   margin: 10px;
-  border-radius: 5px;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Game state and feedback */
-#pass-button {
-  background-color: #FFC107;
-}
-
-#bluff-button {
-  background-color: #DC3545;
-}
-
-#put-in-pile-button {
-  background-color: #28A745;
 }
 
 input[type="checkbox"] {
   margin-right: 5px;
 }
 
-input[type="number"] {
+.game-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#game-board .row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Cards */
+.card {
+  width: 60px;
+  height: 90px;
+  margin: 0 5px;
+  background-color: white;
+  border: 1px solid #2980b9;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 90px;
+  color: black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.card-back {
+  background-color: #2980b9;
+}
+
+/* Player Hand */
+.player-hand {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 10px;
+}
+
+.player-hand .card {
+  transition: transform 0.3s ease;
+}
+
+.player-hand .card.selected {
+  transform: scale(1.2);
+}
+
+/* Timer */
+.timer-container {
+  position: relative;
+  margin-top: 20px;
+}
+
+.timer-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid #3498db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #2980b9;
+  position: absolute;
+}
+
+.timer-circle span {
+  font-size: 18px;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pass-bluff-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+button#pass {
+  background-color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+button#bluff {
+  background-color: #f39c12;
+}
+
+button#put-in-pile {
+  background-color: #2ecc71;
+}
+
+/* Player Avatar */
+.player-avatar {
   width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-color: #bdc3c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-name {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* Center Pile */
+.center-pile {
+  width: 120px;
+  height: 180px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #3498db;
+}
+
+.center-pile img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-hand {
+    margin-bottom: 10px;
+  }
+
+  .card {
+    width: 50px;
+    height: 75px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
