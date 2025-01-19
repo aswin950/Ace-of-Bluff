@@ -1,221 +1,69 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body and background */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #2C3E50;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
 }
 
-/* Initial Screen Styling */
-#initial-screen {
-    text-align: center;
-    margin-top: 50px;
-}
-
-#initial-screen h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#num-players {
-    padding: 10px;
-    font-size: 1rem;
-    margin: 20px;
-    background-color: #34495E;
-    border: none;
-    color: white;
-}
-
-#player-names input {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #34495E;
-    color: white;
-    border: none;
-    width: 200px;
-    border-radius: 5px;
-    font-size: 1rem;
+.start-screen, .game-screen {
+  display: block;
+  padding: 20px;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #3498DB;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 button:disabled {
-    background-color: #7F8C8D;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-button:hover {
-    background-color: #2980B9;
+.card {
+  width: 50px;
+  height: 70px;
+  margin: 5px;
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 70px;
 }
 
-#rules-button {
-    margin-top: 20px;
-    font-size: 1rem;
+.center-pile {
+  margin-top: 20px;
 }
 
-/* Game Screen Styling */
-#game-container {
-    display: none;
-    text-align: center;
-    margin-top: 50px;
+.timer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #000;
+  border-radius: 50%;
+  margin: 20px auto;
+  line-height: 100px;
 }
 
-#game-stats {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
+.circular-timer {
+  text-align: center;
 }
 
-#table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    position: relative;
-    margin-top: 30px;
-    max-width: 90%;
-    height: 400px;
-    border-radius: 50%;
-    background-color: #27AE60;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.hand {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.player-card {
-    position: absolute;
-    width: 60px;
-    height: 90px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-weight: bold;
-    transform-origin: center center;
-    cursor: pointer;
+.buttons {
+  margin-top: 20px;
 }
 
-#cloud-notification {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    color: white;
-    font-size: 1rem;
-    border-radius: 5px;
-    display: none;
-    font-weight: bold;
-}
-
-/* Modal Styles */
-.rules-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-.rules-content {
-    background-color: #ecf0f1;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    text-align: center;
-}
-
-.close-rules {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    color: black;
-    cursor: pointer;
-}
-
-/* End Game Modal */
-#end-game-modal {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    #game-container {
-        margin-top: 20px;
-    }
-
-    #game-stats {
-        font-size: 1.2rem;
-    }
-
-    .player-card {
-        width: 50px;
-        height: 75px;
-    }
-
-    #table-container {
-        height: 300px;
-    }
-
-    #cloud-notification {
-        font-size: 0.8rem;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    #num-players {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    #player-names input {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-
-    #game-stats {
-        font-size: 1rem;
-    }
-
-    .player-card {
-        width: 40px;
-        height: 60px;
-    }
-
-    #table-container {
-        height: 250px;
-    }
+input[type="checkbox"] {
+  margin-right: 5px;
 }
