@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ace of Bluff Game</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/game.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bluff Game</title>
+  <link rel="stylesheet" href="style/styles.css">
 </head>
 <body>
-    <!-- Initial Screen: Number of Players and Name Inputs -->
-    <div id="initial-screen">
-        <h1>Ace of Bluff</h1>
-        <label for="num-players">Number of players:</label>
-        <select id="num-players">
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <div id="player-names"></div>
-        <button id="start-button" disabled>Start Game</button>
-        <button id="rules-button">How to Play</button>
+  <div class="start-screen">
+    <h1>Welcome to Bluff Game</h1>
+    <div class="mode-selection">
+      <button id="classic-button">Classic Multiplayer</button>
+      <button id="custom-button">Custom Game</button>
     </div>
 
-    <!-- Game Screen: Display Players and Cards -->
-    <div id="game-container" style="display: none;">
-        <div id="game-stats">
-            <!-- Game Status (turn indicator, notifications) -->
-        </div>
-        <div id="table-container" class="table-container">
-            <!-- Table and cards displayed here -->
-        </div>
-        <div id="cloud-notification" class="cloud-notification" style="display: none;"></div>
+    <div class="settings">
+      <label for="color-blind-mode">Color Blind Mode</label>
+      <input type="checkbox" id="color-blind-mode">
+      <label for="music-toggle">Music On</label>
+      <input type="checkbox" id="music-toggle" checked>
     </div>
 
-    <!-- Rules Modal -->
-    <div id="rules-modal" class="rules-modal" style="display: none;">
-        <div class="rules-content">
-            <span id="close-rules" class="close-rules">&times;</span>
-            <h2>How to Play</h2>
-            <p>Insert rules here...</p>
-        </div>
+    <div class="player-options">
+      <label for="num-players">Number of Players (2-10):</label>
+      <input type="number" id="num-players" min="2" max="10" value="2">
     </div>
 
-    <!-- End Game Modal or Notification -->
-    <div id="end-game-modal" style="display: none;">
-        <button onclick="requestEndGame()">Request to End Game</button>
+    <div class="deck-selection" style="display: none;">
+      <label for="num-decks">Number of Decks:</label>
+      <input type="number" id="num-decks" min="1" max="5" value="2">
     </div>
 
-    <script>
-        // Add any necessary scripts here (game logic in game.js)
-    </script>
+    <div class="start-game">
+      <button id="start-game-button" disabled>Start Game</button>
+    </div>
+  </div>
+
+  <div class="game-screen" style="display: none;">
+    <div class="timer">
+      <div class="circular-timer"></div>
+    </div>
+
+    <div class="hand">
+      <!-- Player's cards will be displayed here -->
+    </div>
+
+    <div class="buttons">
+      <button id="pass-button">Pass</button>
+      <button id="bluff-button">Bluff</button>
+      <button id="put-in-pile-button" disabled>Put in Pile</button>
+    </div>
+
+    <div class="center-pile">
+      <!-- Center pile of cards -->
+    </div>
+  </div>
+
+  <script src="scripts/game.js"></script>
 </body>
 </html>
