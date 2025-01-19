@@ -4,7 +4,7 @@ let gameActive = false;
 let deck = [];
 let playerCards = [];
 
-// Dynamic player name inputs based on the number of players
+// Dynamic player name inputs based on number of players
 document.getElementById("num-players").addEventListener("change", function () {
     const numPlayers = parseInt(this.value);
     const playerNamesContainer = document.getElementById("player-names");
@@ -41,6 +41,7 @@ document.getElementById("start-button").addEventListener("click", function () {
         }
     });
 
+    // Check if there are enough players (at least 2)
     if (players.length < 2) {
         alert("Please enter at least 2 player names!");
         return;
