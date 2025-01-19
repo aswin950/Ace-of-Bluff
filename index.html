@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Card Game</h1>
+
+        <!-- Game Setup Form -->
+        <div id="setup-form">
+            <label for="num-players">Select Number of Players (2 to 5):</label>
+            <select id="num-players">
+                <option value="2">2 Players</option>
+                <option value="3">3 Players</option>
+                <option value="4">4 Players</option>
+                <option value="5">5 Players</option>
+            </select>
+
+            <div id="player-names">
+                <!-- Player name input fields will be dynamically added here -->
+            </div>
+
+            <button id="start-button">Start Game</button>
+        </div>
+
+        <!-- Game Instructions Button -->
+        <button id="rules-button">How to Play</button>
+
+        <!-- Instructions Modal -->
+        <div id="rules-modal" class="hidden">
+            <div class="modal-content">
+                <h2>Rules of the Card Game</h2>
+                <p>Game rules go here...</p>
+                <button id="close-rules">Close</button>
+            </div>
+        </div>
+
+        <!-- Game Stats -->
+        <div id="game-stats">
+            <!-- Player stats will be shown here -->
+        </div>
+
+        <script src="scripts/game.js"></script>
+    </div>
+</body>
+</html>
