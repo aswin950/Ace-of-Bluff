@@ -6,38 +6,26 @@ let playerCards = [];
 
 // Initialize the deck of cards (52 cards)
 function createDeck() {
-    const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-    const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-    deck = [];
-    suits.forEach(suit => {
-        values.forEach(value => {
-            deck.push({ suit, value });
+    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+        .then(response => response.json())
+        .then(data => {
+            deck = data.deck_id;
+            dealCards();
         });
-    });
-}
-
-// Shuffle the deck using Fisher-Yates algorithm
-function shuffleDeck() {
-    for (let i = deck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap elements
-    }
 }
 
 // Deal cards to players
 function dealCards() {
-    playerCards = [];
-    const numCards = 5; // Number of cards per player
-    // Initialize player hands
-    for (let i = 0; i < players.length; i++) {
-        playerCards[i] = [];
-        for (let j = 0; j < numCards; j++) {
-            playerCards[i].push(deck.pop()); // Deal a card
-        }
-    }
+    fetch(`https://deckofcardsapi.com/api/deck/${deck}/draw/?count=10`) // 5 cards for each player
+        .then(response => response.json())
+        .then(data => {
+            const cards = data.cards;
+            playerCards = [cards.slice(0, 5), cards.slice(5, 10)]; // Split into 2 player hands
+            displayPlayerCards();
+        });
 }
 
-// Display the player's cards on the screen
+// Display the player's cards using images from the Deck of Cards API
 function displayPlayerCards() {
     const statsContainer = document.getElementById("game-stats");
     statsContainer.innerHTML = ""; // Clear existing stats
@@ -49,7 +37,13 @@ function displayPlayerCards() {
 
         // Display each player's cards
         const cardsContainer = document.createElement("div");
-        cardsContainer.innerText = `Cards: ${playerCards[index].map(card => `${card.value} of ${card.suit}`).join(', ')}`;
+        playerCards[index].forEach(card => {
+            const cardImg = document.createElement("img");
+            cardImg.src = card.image; // Get the image URL from the card object
+            cardImg.alt = `${card.value} of ${card.suit}`;
+            cardImg.style.marginRight = "10px";
+            cardsContainer.appendChild(cardImg);
+        });
         statsContainer.appendChild(cardsContainer);
     });
 
@@ -57,26 +51,6 @@ function displayPlayerCards() {
     const turnIndicator = document.createElement("div");
     turnIndicator.innerText = `It's ${players[currentPlayerIndex]}'s turn!`;
     statsContainer.appendChild(turnIndicator);
-}
-
-// Game start function
-function startGame(playerNames) {
-    if (playerNames.length < 2) {
-        alert("At least 2 players are required to start the game!");
-        return;
-    }
-
-    players = playerNames;
-    currentPlayerIndex = 0;
-    gameActive = true;
-
-    // Initialize the deck, shuffle it, and deal the cards
-    createDeck();
-    shuffleDeck();
-    dealCards();
-
-    // Display the player stats and cards
-    displayPlayerCards();
 }
 
 // Start the game with player names and number of players
@@ -110,6 +84,21 @@ document.getElementById("close-rules").addEventListener("click", function() {
     document.getElementById("rules-modal").style.display = "none";
 });
 
+// Game start function
+function startGame(playerNames) {
+    if (playerNames.length < 2) {
+        alert("At least 2 players are required to start the game!");
+        return;
+    }
+
+    players = playerNames;
+    currentPlayerIndex = 0;
+    gameActive = true;
+
+    // Initialize the deck and deal the cards
+    createDeck();
+}
+
 // Update player name input fields based on selected number of players
 document.getElementById("num-players").addEventListener("change", function() {
     const numPlayers = parseInt(this.value);
@@ -117,6 +106,20 @@ document.getElementById("num-players").addEventListener("change", function() {
     playerNamesContainer.innerHTML = ""; // Clear any existing inputs
 
     // Create the required number of input fields for player names
+    for (let i = 0; i < numPlayers; i++) {
+        const playerInput = document.createElement("input");
+        playerInput.setAttribute("type", "text");
+        playerInput.setAttribute("placeholder", `Enter name for Player ${i + 1}`);
+        playerNamesContainer.appendChild(playerInput);
+    }
+});
+
+// Set up the initial state when the page is loaded
+document.addEventListener("DOMContentLoaded", function() {
+    const numPlayers = parseInt(document.getElementById("num-players").value);
+    const playerNamesContainer = document.getElementById("player-names");
+
+    // Create the initial input fields based on the default number of players
     for (let i = 0; i < numPlayers; i++) {
         const playerInput = document.createElement("input");
         playerInput.setAttribute("type", "text");
