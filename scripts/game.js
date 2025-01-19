@@ -1,173 +1,159 @@
-let players = [];
-let currentPlayerIndex = 0;
-let gameActive = false;
-let deck = [];
-let playerCards = [];
+document.addEventListener('DOMContentLoaded', () => {
+  const classicButton = document.getElementById('classic-button');
+  const customButton = document.getElementById('custom-button');
+  const numPlayersInput = document.getElementById('num-players');
+  const numDecksInput = document.getElementById('num-decks');
+  const startGameButton = document.getElementById('start-game-button');
+  const colorBlindModeInput = document.getElementById('color-blind-mode');
+  const musicToggleInput = document.getElementById('music-toggle');
+  
+  const passButton = document.getElementById('pass-button');
+  const bluffButton = document.getElementById('bluff-button');
+  const putInPileButton = document.getElementById('put-in-pile-button');
+  
+  const handDiv = document.querySelector('.hand');
+  const centerPileDiv = document.querySelector('.center-pile');
+  const timerDiv = document.querySelector('.circular-timer');
+  
+  let players = [];
+  let currentPlayerIndex = 0;
+  let timer;
+  let isGameStarted = false;
+  let cardsInPlay = [];
+  
+  classicButton.addEventListener('click', () => {
+    setupGameMode('classic');
+  });
+  
+  customButton.addEventListener('click', () => {
+    setupGameMode('custom');
+  });
 
-// Dynamic player name inputs based on number of players
-document.getElementById("num-players").addEventListener("change", function () {
-    const numPlayers = parseInt(this.value);
-    const playerNamesContainer = document.getElementById("player-names");
-    playerNamesContainer.innerHTML = ""; // Clear existing inputs
+  numPlayersInput.addEventListener('input', validateStartButton);
+  numDecksInput.addEventListener('input', validateStartButton);
 
-    // Display input fields based on selected number of players
-    for (let i = 0; i < numPlayers; i++) {
-        const playerInput = document.createElement("input");
-        playerInput.setAttribute("type", "text");
-        playerInput.setAttribute("placeholder", `Enter name for Player ${i + 1}`);
-        playerNamesContainer.appendChild(playerInput);
+  passButton.addEventListener('click', handlePass);
+  bluffButton.addEventListener('click', handleBluff);
+  putInPileButton.addEventListener('click', handlePutInPile);
+
+  function setupGameMode(mode) {
+    document.querySelector('.start-screen').style.display = 'none';
+    document.querySelector('.game-screen').style.display = 'block';
+    startGameButton.disabled = false;
+    
+    startGameButton.addEventListener('click', startGame);
+    
+    if (mode === 'classic') {
+      numDecksInput.style.display = 'block';
+    } else {
+      numDecksInput.style.display = 'none';
     }
-
-    // Enable the start button if there are valid inputs
-    document.getElementById("start-button").disabled = false;
-});
-
-// Start the game with player names and number of players
-document.getElementById("start-button").addEventListener("click", function () {
-    const numPlayers = parseInt(document.getElementById("num-players").value);
-    const playerInputs = document.querySelectorAll("#player-names input");
-
-    // Collect player names
-    players = [];
-    playerInputs.forEach(input => {
-        if (input.value.trim() !== "") {
-            // Ensure that names are valid (alphanumeric, max 12 chars)
-            if (/^[a-zA-Z0-9]{1,12}$/.test(input.value)) {
-                players.push(input.value.trim());
-            } else {
-                alert("Player names must be alphanumeric and less than 12 characters.");
-                return;
-            }
-        }
-    });
-
-    // Check if there are enough players (at least 2)
-    if (players.length < 2) {
-        alert("Please enter at least 2 player names!");
-        return;
-    }
-
-    // Hide the initial screen and show the game screen
-    document.getElementById("initial-screen").style.display = "none";
-    document.getElementById("game-container").style.display = "block";
-
-    // Start the game
-    startGame(players);
-});
-
-// Show how to play rules
-document.getElementById("rules-button").addEventListener("click", function () {
-    document.getElementById("rules-modal").style.display = "flex";
-});
-
-document.getElementById("close-rules").addEventListener("click", function () {
-    document.getElementById("rules-modal").style.display = "none";
-});
-
-// Game start function
-function startGame(playerNames) {
-    if (playerNames.length < 2) {
-        alert("At least 2 players are required to start the game!");
-        return;
-    }
-
-    players = playerNames;
+  }
+  
+  function startGame() {
+    const numPlayers = parseInt(numPlayersInput.value);
+    const numDecks = parseInt(numDecksInput.value);
+    
+    // Initialize players, deal cards, shuffle, etc.
+    players = initializePlayers(numPlayers, numDecks);
     currentPlayerIndex = 0;
-    gameActive = true;
+    
+    isGameStarted = true;
+    startRound();
+  }
+  
+  function startRound() {
+    const currentPlayer = players[currentPlayerIndex];
+    handDiv.innerHTML = renderHand(currentPlayer.cards);
+    
+    startTimer();
+  }
 
-    // Initialize the deck, shuffle it, and deal the cards
-    createDeck();
-    shuffleDeck();
-    dealCards();
+  function startTimer() {
+    let timeLeft = 20;
+    timer = setInterval(() => {
+      timeLeft -= 1;
+      timerDiv.textContent = `${timeLeft}s`;
+      
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        moveToNextPlayer();
+      }
+    }, 1000);
+  }
 
-    // Display the player stats and cards
-    displayPlayerCards();
-}
+  function moveToNextPlayer() {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    startRound();
+  }
 
-// Initialize the deck of cards
-function createDeck() {
-    const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+  function handlePass() {
+    // Handle pass logic, move to the next player.
+    moveToNextPlayer();
+  }
+
+  function handleBluff() {
+    // Handle bluff logic, check for challenge, etc.
+    moveToNextPlayer();
+  }
+
+  function handlePutInPile() {
+    // Logic for putting selected cards in the pile
+    centerPileDiv.innerHTML += renderCards(cardsInPlay);
+    cardsInPlay = [];
+    moveToNextPlayer();
+  }
+
+  function validateStartButton() {
+    const numPlayers = parseInt(numPlayersInput.value);
+    const numDecks = parseInt(numDecksInput.value);
+    startGameButton.disabled = numPlayers < 2 || numPlayers > 10 || numDecks < 1 || numDecks > 5;
+  }
+
+  function renderHand(cards) {
+    return cards.map(card => `<div class="card">${card}</div>`).join('');
+  }
+
+  function renderCards(cards) {
+    return cards.map(card => `<div class="card">${card}</div>`).join('');
+  }
+
+  function initializePlayers(numPlayers, numDecks) {
+    // Initialize players, deal cards, shuffle decks, etc.
+    const players = [];
+    
+    for (let i = 0; i < numPlayers; i++) {
+      players.push({ id: i, name: `Player ${i+1}`, cards: dealCards(numDecks) });
+    }
+
+    return players;
+  }
+
+  function dealCards(numDecks) {
+    const deck = [];
+    for (let i = 0; i < numDecks; i++) {
+      deck.push(...generateDeck());
+    }
+    return shuffle(deck).slice(0, Math.floor(deck.length / 10) * 2); // distribute cards evenly
+  }
+
+  function generateDeck() {
+    const suits = ['♠', '♥', '♦', '♣'];
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-    deck = [];
-    suits.forEach(suit => {
-        values.forEach(value => {
-            deck.push({ suit, value });
-        });
-    });
-}
+    const deck = [];
+    for (const suit of suits) {
+      for (const value of values) {
+        deck.push(`${value}${suit}`);
+      }
+    }
+    return deck;
+  }
 
-// Shuffle the deck using Fisher-Yates algorithm
-function shuffleDeck() {
+  function shuffle(deck) {
     for (let i = deck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap elements
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-}
-
-// Deal cards to players
-function dealCards() {
-    playerCards = [];
-    const numCards = 5; // Number of cards per player
-    for (let i = 0; i < players.length; i++) {
-        playerCards[i] = [];
-        for (let j = 0; j < numCards; j++) {
-            playerCards[i].push(deck.pop()); // Deal a card
-        }
-    }
-}
-
-// Display player cards (Images and player names)
-function displayPlayerCards() {
-    const tableContainer = document.querySelector(".table-container");
-    tableContainer.innerHTML = ""; // Clear existing cards
-
-    players.forEach((player, index) => {
-        const playerDiv = document.createElement("div");
-        playerDiv.classList.add("player-card");
-
-        // Avatar image for the player
-        const avatarImg = document.createElement("img");
-        avatarImg.src = `https://avatars.dicebear.com/api/human/${player}.svg`; // Random avatar
-        playerDiv.appendChild(avatarImg);
-
-        // Display each player's cards
-        const cardsContainer = document.createElement("div");
-        cardsContainer.classList.add("cards");
-        playerCards[index].forEach(card => {
-            const cardImg = document.createElement("img");
-            cardImg.src = `https://deckofcardsapi.com/static/img/${card.value[0]}${card.suit[0]}.png`;
-            cardsContainer.appendChild(cardImg);
-        });
-        playerDiv.appendChild(cardsContainer);
-        tableContainer.appendChild(playerDiv);
-    });
-
-    // Display who's turn it is
-    const turnIndicator = document.createElement("div");
-    turnIndicator.innerText = `It's ${players[currentPlayerIndex]}'s turn!`;
-    turnIndicator.classList.add("turn-indicator");
-    document.getElementById("game-stats").appendChild(turnIndicator);
-}
-
-// Passing turn logic
-function passTurn() {
-    if (gameActive) {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-        displayPlayerCards();
-    }
-}
-
-// Optionally, add other game logic here (card handling, bluffing, etc.)
-
-// End game request logic
-function requestEndGame() {
-    // Show the end game notification for the other player
-    const notification = document.getElementById("cloud-notification");
-    notification.innerText = `${players[currentPlayerIndex]} has requested to end the game.`;
-    notification.style.display = "block";
-}
-
-// Close end game notification
-function closeEndGameNotification() {
-    document.getElementById("cloud-notification").style.display = "none";
-}
+    return deck;
+  }
+});
