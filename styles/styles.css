@@ -1,119 +1,183 @@
-/* General reset and body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #4d4d4d; /* Background color for the overall page */
-    color: white;
-    text-align: center;
+/* General reset and body styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Game Table and Chairs */
-#game-stats {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    position: relative;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2c3e50; /* Dark background for the whole page */
+    color: white;
 }
 
+/* Game container */
 .table-container {
     position: relative;
-    width: 600px;
-    height: 600px;
-    margin: auto;
+    width: 80vw;
+    height: 80vw;
     border-radius: 50%;
-    border: 3px solid #c8c8c8;
-    background-color: #3d5a6f; /* Table color */
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    margin: 5vh auto;
+    background-color: #34495e; /* Table color */
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
-/* Circular player positioning */
 .player-card-container {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    position: absolute;
-}
-
-/* Styling each card in the circle */
-.card {
-    width: 100px;
-    height: 140px;
-    background-color: transparent;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: 5px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    text-align: center;
-    font-size: 14px;
-}
-
-/* Adjusting card position for a circular formation */
-.card:nth-child(1) { transform: rotate(0deg) translate(180px) rotate(0deg); }
-.card:nth-child(2) { transform: rotate(36deg) translate(180px) rotate(-36deg); }
-.card:nth-child(3) { transform: rotate(72deg) translate(180px) rotate(-72deg); }
-.card:nth-child(4) { transform: rotate(108deg) translate(180px) rotate(-108deg); }
-.card:nth-child(5) { transform: rotate(144deg) translate(180px) rotate(-144deg); }
-.card:nth-child(6) { transform: rotate(180deg) translate(180px) rotate(-180deg); }
-.card:nth-child(7) { transform: rotate(216deg) translate(180px) rotate(-216deg); }
-.card:nth-child(8) { transform: rotate(252deg) translate(180px) rotate(-252deg); }
-.card:nth-child(9) { transform: rotate(288deg) translate(180px) rotate(-288deg); }
-.card:nth-child(10) { transform: rotate(324deg) translate(180px) rotate(-324deg); }
-
-#end-game-notification {
-    font-size: 12px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-    top: 10px;
-    right: 10px;
-    display: none;
-}
-
-/* Cloud notification styles */
-.cloud-notification {
-    position: fixed;
-    top: 20px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    font-size: 14px;
-    display: none;
+    transform: translate(-50%, -50%);
 }
 
-/* Chair customization */
+/* Card styles */
+.card {
+    width: 70px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 10px;
+}
+
+/* Chair and Avatar Styles */
 .chair {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: #f0a500;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border: 5px solid #ecf0f1;
+    overflow: hidden;
+    background-color: #ecf0f1;
 }
 
 .chair img {
-    border-radius: 50%;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-/* Chair placements around the table (example for 5 players) */
-.chair:nth-child(1) { top: 15px; left: 50%; transform: translateX(-50%); }
-.chair:nth-child(2) { top: 50%; left: 10px; }
-.chair:nth-child(3) { bottom: 15px; left: 50%; transform: translateX(-50%); }
-.chair:nth-child(4) { top: 50%; right: 10px; }
-.chair:nth-child(5) { top: 10px; left: 50%; }
+/* Circular Player Positions */
+.chair:nth-child(1) {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.chair:nth-child(2) {
+    top: 25%;
+    left: 85%;
+    transform: translateY(-50%);
+}
+
+.chair:nth-child(3) {
+    top: 50%;
+    left: 90%;
+    transform: translateY(-50%) translateX(-100%);
+}
+
+.chair:nth-child(4) {
+    top: 75%;
+    left: 85%;
+    transform: translateY(-50%) translateX(-100%);
+}
+
+.chair:nth-child(5) {
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.chair:nth-child(6) {
+    top: 75%;
+    left: 15%;
+    transform: translateY(-50%);
+}
+
+.chair:nth-child(7) {
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%) translateX(100%);
+}
+
+.chair:nth-child(8) {
+    top: 25%;
+    left: 15%;
+    transform: translateY(-50%) translateX(100%);
+}
+
+.chair:nth-child(9) {
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Styling for the cloud notification (for player turn) */
+.cloud-notification {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 15px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+}
+
+.initial-screen {
+    text-align: center;
+    padding: 50px;
+    background-color: #34495e;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+#num-players,
+#start-button,
+#rules-button {
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #16a085;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+input[type="text"] {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #2c3e50;
+    background-color: #ecf0f1;
+    color: #34495e;
+}
+
+/* Hide initial screen after game starts */
+#initial-screen {
+    display: block;
+}
+
+.game-active #initial-screen {
+    display: none;
+}
+
+#game-stats {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    color: #ecf0f1;
+}
+
+/* Styles for the game screen after start */
+.game-active {
+    display: block;
+}
