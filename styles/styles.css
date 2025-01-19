@@ -1,6 +1,8 @@
+/* Dark Mode Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #121212;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,6 +14,10 @@ body {
     text-align: center;
     width: 90%;
     max-width: 600px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button {
@@ -19,6 +25,14 @@ button {
     margin: 10px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #575757;
 }
 
 #rules-modal {
@@ -34,9 +48,10 @@ button {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #2a2a2a;
     padding: 20px;
     border-radius: 5px;
+    color: #ffffff;
 }
 
 .hidden {
@@ -45,4 +60,22 @@ button {
 
 #game-stats {
     margin-top: 20px;
+}
+
+#game-cards {
+    margin-top: 20px;
+}
+
+input {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #4CAF50;
 }
