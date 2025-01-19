@@ -7,30 +7,32 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <div id="game-setup">
-        <h1>Ace of Bluff</h1>
-        <div>
-            <label for="num-players">Number of players: </label>
-            <select id="num-players" name="num-players">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
+    <!-- Notification for End Game Requests -->
+    <div id="end-game-notification" style="position: fixed; top: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.5); color: white; padding: 5px; font-size: 12px; display: none;"></div>
+
+    <!-- Initial screen with player setup -->
+    <div id="initial-screen">
+        <label for="num-players">Number of players:</label>
+        <select id="num-players">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
         <div id="player-names"></div>
+
         <button id="start-button">Start Game</button>
         <button id="rules-button">How to Play</button>
     </div>
 
+    <!-- Modal for how to play rules -->
     <div id="rules-modal" style="display: none;">
-        <h2>How to Play</h2>
-        <p>Game instructions go here...</p>
         <button id="close-rules">Close</button>
+        <p>Game rules go here...</p>
     </div>
 
-    <div id="game-stats">
-        <!-- Game stats (player names, cards, turn) will be displayed here -->
-    </div>
+    <!-- Game stats and player info will be dynamically added here -->
+    <div id="game-stats"></div>
 
     <script src="scripts/game.js"></script>
 </body>
