@@ -84,6 +84,5 @@ function passTurn() {
     if (gameActive) {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         displayStats();
+    }  // <- This closing brace was missing before
 }
-
-// Optionally, add other game logic here (card handling, bluffing, etc.)
