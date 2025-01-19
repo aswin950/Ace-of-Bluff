@@ -1,22 +1,38 @@
+/* General body styling */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  padding: 20px;
   background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-.start-screen, .game-screen {
-  display: block;
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Start screen */
+.start-screen {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mode-selection {
+  margin: 20px;
 }
 
 button {
-  margin: 10px;
   padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
   cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 button:disabled {
@@ -24,33 +40,26 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.card {
-  width: 50px;
-  height: 70px;
-  margin: 5px;
-  display: inline-block;
-  background-color: #fff;
-  border: 1px solid #000;
-  text-align: center;
-  line-height: 70px;
+input[type="number"], input[type="checkbox"] {
+  margin: 10px;
 }
 
-.center-pile {
+.settings {
   margin-top: 20px;
 }
 
-.timer {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border: 10px solid #000;
-  border-radius: 50%;
-  margin: 20px auto;
-  line-height: 100px;
+.player-options, .deck-selection {
+  margin-top: 10px;
 }
 
-.circular-timer {
-  text-align: center;
+.start-game {
+  margin-top: 20px;
+}
+
+/* Game screen */
+.game-screen {
+  display: none;
+  padding: 20px;
 }
 
 .hand {
@@ -60,10 +69,80 @@ button:disabled {
   flex-wrap: wrap;
 }
 
+.card {
+  width: 60px;
+  height: 80px;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 80px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.center-pile {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  border: 2px dashed #000;
+}
+
+.timer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: 10px solid #333;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+.circular-timer {
+  text-align: center;
+  line-height: 120px;
+  font-size: 20px;
+}
+
+/* Buttons */
 .buttons {
   margin-top: 20px;
 }
 
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Game state and feedback */
+#pass-button {
+  background-color: #FFC107;
+}
+
+#bluff-button {
+  background-color: #DC3545;
+}
+
+#put-in-pile-button {
+  background-color: #28A745;
+}
+
 input[type="checkbox"] {
   margin-right: 5px;
+}
+
+input[type="number"] {
+  width: 50px;
 }
