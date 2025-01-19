@@ -1,4 +1,4 @@
-/* General reset and body styles */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,177 +7,154 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #2c3e50; /* Dark background for the whole page */
+    background-color: #2d2d2d;
     color: white;
-}
-
-/* Game container */
-.table-container {
-    position: relative;
-    width: 80vw;
-    height: 80vw;
-    border-radius: 50%;
-    margin: 5vh auto;
-    background-color: #34495e; /* Table color */
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    flex-direction: column;
 }
 
-.player-card-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#initial-screen {
+    text-align: center;
 }
 
-/* Card styles */
-.card {
-    width: 70px;
-    height: 100px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+h1 {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
     margin: 10px;
 }
 
-/* Chair and Avatar Styles */
-.chair {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 5px solid #ecf0f1;
-    overflow: hidden;
-    background-color: #ecf0f1;
+#player-names {
+    display: none;
+    margin-bottom: 20px;
 }
 
-.chair img {
+#player-names input {
+    margin: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
 }
 
-/* Circular Player Positions */
-.chair:nth-child(1) {
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
 }
 
-.chair:nth-child(2) {
-    top: 25%;
-    left: 85%;
-    transform: translateY(-50%);
-}
-
-.chair:nth-child(3) {
-    top: 50%;
-    left: 90%;
-    transform: translateY(-50%) translateX(-100%);
-}
-
-.chair:nth-child(4) {
-    top: 75%;
-    left: 85%;
-    transform: translateY(-50%) translateX(-100%);
-}
-
-.chair:nth-child(5) {
-    top: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.chair:nth-child(6) {
-    top: 75%;
-    left: 15%;
-    transform: translateY(-50%);
-}
-
-.chair:nth-child(7) {
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%) translateX(100%);
-}
-
-.chair:nth-child(8) {
-    top: 25%;
-    left: 15%;
-    transform: translateY(-50%) translateX(100%);
-}
-
-.chair:nth-child(9) {
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Styling for the cloud notification (for player turn) */
-.cloud-notification {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px 15px;
-    border-radius: 15px;
-    color: white;
-    font-size: 14px;
+#close-rules {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
-    display: none; /* Hidden by default */
 }
 
-.initial-screen {
-    text-align: center;
-    padding: 50px;
-    background-color: #34495e;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-}
-
-#num-players,
-#start-button,
-#rules-button {
-    font-size: 16px;
-    margin: 10px;
-    padding: 10px;
+#close-rules:hover,
+#close-rules:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
-    background-color: #16a085;
-    border: none;
-    color: white;
-    border-radius: 5px;
 }
 
-input[type="text"] {
-    font-size: 16px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    border: 1px solid #2c3e50;
-    background-color: #ecf0f1;
-    color: #34495e;
+/* Game Table */
+#game-container {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
 }
 
-/* Hide initial screen after game starts */
-#initial-screen {
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Adjust for max 10 players */
+    gap: 10px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+.table-container img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.game-active {
     display: block;
 }
 
-.game-active #initial-screen {
+footer {
+    position: fixed;
+    bottom: 10px;
+    color: #aaa;
+}
+
+.cloud-notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
     display: none;
 }
 
-#game-stats {
-    font-size: 18px;
-    margin-top: 20px;
-    text-align: center;
-    color: #ecf0f1;
+/* Responsive Design */
+@media (max-width: 600px) {
+    .table-container {
+        grid-template-columns: repeat(2, 1fr); /* Stack cards for mobile */
+        gap: 5px;
+    }
+
+    #game-stats {
+        font-size: 12px;
+    }
 }
 
-/* Styles for the game screen after start */
-.game-active {
-    display: block;
+@media (min-width: 601px) {
+    .table-container {
+        grid-template-columns: repeat(5, 1fr); /* 5 columns for players */
+    }
 }
