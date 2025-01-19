@@ -20,7 +20,7 @@ document.getElementById("num-players").addEventListener("change", function() {
 document.getElementById("start-button").addEventListener("click", function() {
     const numPlayers = parseInt(document.getElementById("num-players").value);
     const playerInputs = document.querySelectorAll("#player-names input");
-    
+
     // Collect player names
     players = [];
     playerInputs.forEach(input => {
